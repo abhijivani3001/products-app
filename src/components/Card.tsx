@@ -20,7 +20,7 @@ const Card: React.FC<{ product: ProductType }> = ({ product }) => {
           to={`/products/${product.id}`}
           className='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-gray-100 rounded-md hover:text-white focus:outline-none bg-blue-600 hover:bg-blue-700 transition'
         >
-          Read more
+          More info
           <svg
             className='rtl:rotate-180 w-3.5 h-3.5 ms-2'
             aria-hidden='true'
