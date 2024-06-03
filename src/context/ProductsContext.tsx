@@ -57,7 +57,7 @@ export const ProductsProvider = ({
     setIsLoading(true);
     try {
       const res = await axios.get(
-        import.meta.env.VITE_API_URL + `?skip=${index}&limit=10`
+        import.meta.env.VITE_API_URL + `?skip=${index}&limit=10` // skips index values and get 10 items each time
       );
       setProducts((prevProducts) => [...prevProducts, ...res.data.products]);
       setIndex((prevIdx) => prevIdx + 10);

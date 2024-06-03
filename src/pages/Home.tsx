@@ -18,7 +18,8 @@ const Home = () => {
       const filtered = products?.filter(
         (product) =>
           product.title?.toLowerCase().includes(searchedItem) ||
-          product.brand?.toLowerCase().includes(searchedItem)
+          product.brand?.toLowerCase().includes(searchedItem) ||
+          product.tags?.some((tag) => tag.toLowerCase().includes(searchedItem))
       );
       setFilteredProducts(filtered || []);
     }
@@ -43,7 +44,7 @@ const Home = () => {
           })}
         </div>
       ) : (
-        <div className='text-gray-300 h-[85vh] text-xl flex items-center justify-center'>
+        <div className='text-gray-300 h-[80vh] text-xl flex items-center justify-center'>
           No more products are available!
         </div>
       )}
