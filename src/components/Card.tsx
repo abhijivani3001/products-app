@@ -5,7 +5,7 @@ const Card: React.FC<{ product: ProductType }> = ({ product }) => {
   return (
     <div className='flex-auto max-w-[20rem] border rounded-lg shadow-lg bg-gray-900 border-gray-700'>
       <img
-        className='rounded-t-lg max-h-40 mx-auto'
+        className='rounded-t-lg max-h-40 mx-auto object-contain'
         src={product.thumbnail}
         alt='product image'
       />

@@ -1,6 +1,15 @@
+import { useProducts } from '@/context/ProductsContext';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const { setSearchedItem } = useProducts();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSearch = (e: any) => {
+    const searchedItem = e.target.value.trim().toLowerCase();
+    setSearchedItem(searchedItem);
+  };
+
   return (
     <nav className='border-gray-800 bg-gray-900 z-30 w-full shadow-lg sticky top-0'>
       <div className='max-w-screen-xl flex items-center justify-between mx-auto p-4 my-auto'>
@@ -36,12 +45,15 @@ const Navbar = () => {
               </svg>
               <span className='sr-only'>Search icon</span>
             </div>
-            <input
-              type='text'
-              id='search-navbar'
-              className='block w-full p-2 ps-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none'
-              placeholder='Search...'
-            />
+            <form onSubmit={(e) => e.preventDefault()}>
+              <input
+                type='text'
+                id='search-navbar'
+                className='block w-full p-2 ps-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none'
+                placeholder='Search...'
+                onChange={handleSearch}
+              />
+            </form>
           </div>
         </div>
       </div>

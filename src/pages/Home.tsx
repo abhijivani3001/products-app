@@ -2,9 +2,27 @@ import Card from '@/components/Card';
 import PageLayout from '@/components/PageLayout';
 import { Spinner } from '@/components/ui/Spinner';
 import { useProducts } from '@/context/ProductsContext';
+import { ProductType } from '@/types/Product';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
-  const { products, isLoading, isError } = useProducts();
+  const { products, isLoading, isError, searchedItem } = useProducts();
+
+  const [filteredProducts, setFilteredProducts] = useState<
+    ProductType[] | null
+  >(null);
+
+  useEffect(() => {
+    setFilteredProducts(products);
+    if (searchedItem) {
+      const filtered = products?.filter(
+        (product) =>
+          product.title?.toLowerCase().includes(searchedItem) ||
+          product.brand?.toLowerCase().includes(searchedItem)
+      );
+      setFilteredProducts(filtered || []);
+    }
+  }, [products, searchedItem]);
 
   if (isError) {
     return (
@@ -16,13 +34,17 @@ const Home = () => {
 
   return (
     <PageLayout>
-      {isLoading ? (
+      {isLoading || filteredProducts === null ? (
         <Spinner />
-      ) : (
+      ) : filteredProducts?.length ? (
         <div className='flex flex-wrap justify-center items-start gap-5'>
-          {products?.map((product) => {
+          {filteredProducts?.map((product) => {
             return <Card key={product.id} product={product} />;
           })}
+        </div>
+      ) : (
+        <div className='text-gray-300 h-[85vh] text-xl flex items-center justify-center'>
+          No more products are available!
         </div>
       )}
     </PageLayout>

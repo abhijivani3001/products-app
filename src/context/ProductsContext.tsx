@@ -6,7 +6,10 @@ interface ProductsContextValueType {
   products: ProductType[] | null;
   setProducts: (products: ProductType[]) => void;
   isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
   isError: boolean;
+  searchedItem: string;
+  setSearchedItem: (item: string) => void;
 }
 
 const ProductsContext = createContext<ProductsContextValueType | null>(null);
@@ -25,9 +28,10 @@ export const ProductsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [products, setProducts] = useState<ProductType[] | null>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [searchedItem, setSearchedItem] = useState<string>('');
 
   const getProducts = async () => {
     try {
@@ -47,7 +51,15 @@ export const ProductsProvider = ({
 
   return (
     <ProductsContext.Provider
-      value={{ products, setProducts, isLoading, isError }}
+      value={{
+        products,
+        setProducts,
+        isLoading,
+        setIsLoading,
+        isError,
+        searchedItem,
+        setSearchedItem,
+      }}
     >
       {children}
     </ProductsContext.Provider>
