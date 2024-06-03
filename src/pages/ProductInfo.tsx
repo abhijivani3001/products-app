@@ -22,8 +22,6 @@ const ProductInfo = () => {
     (item) => item.id === numericProductId
   );
 
-  console.log(product);
-
   return (
     <PageLayout>
       {isLoading ? (
