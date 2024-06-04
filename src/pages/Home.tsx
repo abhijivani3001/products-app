@@ -26,27 +26,28 @@ const Home = () => {
   }, [products, searchedItem]);
 
   if (isError) {
-    return (
-      <div className='text-xl text-gray-100 flex justify-center items-center'>
-        Something went wrong!
-      </div>
-    );
+    return <div className='error-msg'>Something went wrong!</div>;
   }
 
   return (
     <PageLayout>
-      {isLoading || filteredProducts === null ? (
+      {(isLoading && !filteredProducts?.length) || filteredProducts === null ? (
         <Spinner />
       ) : filteredProducts?.length ? (
-        <div className='flex flex-wrap justify-center items-start gap-5'>
-          {filteredProducts?.map((product) => {
-            return <Card key={product.id} product={product} />;
-          })}
-        </div>
+        <>
+          <div className='flex flex-wrap justify-center items-start gap-5'>
+            {filteredProducts?.map((product) => {
+              return <Card key={product.id} product={product} />;
+            })}
+          </div>
+          {isLoading && (
+            <div className='text-2xl  text-gray-300 text-center my-10'>
+              Loading more products...
+            </div>
+          )}
+        </>
       ) : (
-        <div className='text-gray-300 h-[80vh] text-xl flex items-center justify-center'>
-          No more products are available!
-        </div>
+        <div className='error-msg'>No more products are available!</div>
       )}
     </PageLayout>
   );

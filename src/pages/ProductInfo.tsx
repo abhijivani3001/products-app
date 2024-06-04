@@ -11,11 +11,7 @@ const ProductInfo = () => {
   const numericProductId = parseInt(productId || '-1', 10);
 
   if (isError) {
-    return (
-      <div className='text-xl text-gray-100 flex justify-center items-center'>
-        Something went wrong!
-      </div>
-    );
+    return <div className='error-msg'>Something went wrong!</div>;
   }
 
   const product: ProductType | undefined = products?.find(

@@ -98,4 +98,8 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .error-msg {
+    @apply text-gray-300 h-[80vh] text-xl flex items-center justify-center;
+  }
 }

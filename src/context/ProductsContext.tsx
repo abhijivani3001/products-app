@@ -52,7 +52,7 @@ export const ProductsProvider = ({
     ) {
       return;
     }
-    // here 194 is total products available
+    // here 194 is total available products
 
     setIsLoading(true);
     try {
